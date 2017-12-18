@@ -28,14 +28,14 @@ public class AggregationQuestionTest {
 
 	/**
 	 * users
- 	 * id, name
+	 * id, name
 	 * [ 1, 'bob']
 	 * [ 2, 'sally’]
 	 * ...
- 	 */
+	 */
 
 	/**
- 	 * metrics
+	 * metrics
 	 * user_id, name, value
 	 * [ 1, ‘likes', 10]
 	 * [ 1, ‘views', 98]
@@ -56,27 +56,28 @@ public class AggregationQuestionTest {
 		User sally = new BasicUser(2, "sally");
 
 		List<User> users = Lists.newArrayList(bob, sally);
-		
+
 		List<Metric> metric = Lists.<Metric>newArrayList(
 				new BasicMetric(1, "likes", 10),
 				new BasicMetric(1, "views", 98),
 				new BasicMetric(1, "clicks", 390),
 				new BasicMetric(2, "likes", 56),
 				new BasicMetric(2, "views", 76),
-				new BasicMetric(2, "likes", 23)
+				new BasicMetric(2, "clicks", 23)
 		);
 
 		Map<User, Map<String, Long>> actual = this.aggregationQuestion.aggregate(metric, users);
-		
+
 		Map<User, Map<String, Long>> expected = ImmutableMap.<User, Map<String, Long>>builder()
 				.put(bob, ImmutableMap.<String, Long>builder()
-						.put("likes", 10L)
-						.put("views", 98L)
-						.put("clicks", 390L)
+						.put("likes", 10l)
+						.put("views", 98l)
+						.put("clicks", 390l)
 						.build())
 				.put(sally, ImmutableMap.<String, Long>builder()
-						.put("likes", 79L)
-						.put("views", 76L)
+						.put("likes", 56l)
+						.put("views", 76l)
+						.put("clicks", 23l)
 						.build())
 				.build();
 
